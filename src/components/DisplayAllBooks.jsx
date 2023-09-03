@@ -7,14 +7,15 @@ import { Button, Input, Label } from "reactstrap";
 
 export function DisplayAllBooks() {
   const [bookData, setBookData] = useState([]);
-  const [filteredSearch, setFilteredSearch] = useState(bookData);
+  const [searchBook, setSearchBook] = useState(bookData);
 
   const getBooks = () => {
     axios.get(`${API}/books`).then((res) => {
       if (res.status === 401) {
         console.log("Data Not Found");
       }
-      setBookData(res.data);
+      setBookData(res.bookData);
+      setSearchBook(res.bookData);
     });
   };
 
@@ -39,16 +40,14 @@ export function DisplayAllBooks() {
   const navigate = useNavigate();
 
   const handleSearch = (event) => {
-    if (event.target.value === null) {
-      setFilteredSearch(bookData);
-      return;
-    }
-    const filteredValue = bookData.filter(
-      (item) =>
-        item.name.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1
-    );
-    setFilteredSearch(filteredValue);
-  };
+    if(event.target.value === null){;
+    setSearchBook(bookData);
+    return 
+  }
+  const searchedBook = data.filter((item)=> item.title.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1 )
+  setSearchBook(searchedBook)
+};
+
   return (
     <div>
       <div>
@@ -61,7 +60,7 @@ export function DisplayAllBooks() {
       </div>
       <br />
       <br />
-      {filteredSearch.map((item) => {
+      {searchBook.map((item) => {
         return (
           <BookCard key={item.id} value={item} handleDelete={handleDelete} />
         );
