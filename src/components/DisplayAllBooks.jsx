@@ -39,7 +39,7 @@ export function DisplayAllBooks() {
   const navigate = useNavigate();
 
   const handleSearch = (event) => {
-    if (event.target.value === "") {
+    if (event.target.value === null) {
       setFilteredSearch(bookData);
       return;
     }
