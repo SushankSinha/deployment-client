@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Form, FormGroup, Label, Input, Button, Col } from "reactstrap";
 import { API } from "../global";
 import { useNavigate } from "react-router-dom";
-function AddBooks({ bookData, setBookData }) {
+import axios from "axios";
+
+function AddBooks() {
 
   const [name, setName] = useState("");
   const [poster, setPoster] = useState("");
@@ -19,16 +21,13 @@ function AddBooks({ bookData, setBookData }) {
       summary: summary,
     };
 
-    fetch(`${API}/books`, {
+    axios.post(`${API}/books/add`, {
       method: "POST",
       body: JSON.stringify(newBook),
       headers: { "Content-Type": "application/json" },
     })
       .then((data) => data.json())
-      .then((res) => {
-        setBookData(res);
-      })
-      .then(() => navigate("/"));
+      .then((res) => navigate("/"));
   };
 
   return (
