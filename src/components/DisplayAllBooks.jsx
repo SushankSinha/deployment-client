@@ -7,28 +7,21 @@ import { Button, Input, Label } from "reactstrap";
 
 export function DisplayAllBooks() {
   const [bookData, setBookData] = useState([]);
-  const [searchBook, setSearchBook] = useState(bookData);
+  const [filteredSearch, setFilteredSearch] = useState(bookData);
 
   const getBooks = () => {
     axios.get(`${API}/books`).then((res) => {
       if (res.status === 401) {
         console.log("Data Not Found");
       }
-      setBookData(res.bookData);
-      setSearchBook(res.bookData);
+      setBookData(res.data);
+      setFilteredSearch(res.data)
     });
   };
 
   useEffect(() => {
     getBooks();
   }, []);
-
-  // sessionStorage.setItem("BookData", JSON.stringify(bookData));
-  // var b = JSON.parse(sessionStorage.getItem("BookData", bookData));
- 
-  // for (let i = 0; i < b.length; i++) {
-  //   console.log(b[i]);
-  // }
 
   const handleDelete = (id) => {
     axios.delete(`${API}/books/` + id).then((res) => {
@@ -40,14 +33,16 @@ export function DisplayAllBooks() {
   const navigate = useNavigate();
 
   const handleSearch = (event) => {
-    if(event.target.value === null){;
-    setSearchBook(bookData);
-    return 
-  }
-  const searchedBook = bookData.filter((item)=> item.title.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1 )
-  setSearchBook(searchedBook)
-};
-
+    if (event.target.value === null) {
+      setFilteredSearch(bookData);
+      return;
+    }
+    const filteredValue = bookData.filter(
+      (item) =>
+        item.name.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1
+    );
+    setFilteredSearch(filteredValue);
+  };
   return (
     <div>
       <div>
@@ -60,7 +55,7 @@ export function DisplayAllBooks() {
       </div>
       <br />
       <br />
-      {searchBook.map((item) => {
+      {filteredSearch.map((item) => {
         return (
           <BookCard key={item.id} value={item} handleDelete={handleDelete} />
         );
