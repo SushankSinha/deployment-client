@@ -22,12 +22,12 @@ export function DisplayAllBooks() {
     getBooks();
   }, []);
 
-  sessionStorage.setItem("BookData", JSON.stringify(bookData));
-  var b = JSON.parse(sessionStorage.getItem("BookData", bookData));
+  // sessionStorage.setItem("BookData", JSON.stringify(bookData));
+  // var b = JSON.parse(sessionStorage.getItem("BookData", bookData));
  
-  for (let i = 0; i < b.length; i++) {
-    console.log(b[i]);
-  }
+  // for (let i = 0; i < b.length; i++) {
+  //   console.log(b[i]);
+  // }
 
   const handleDelete = (id) => {
     axios.delete(`${API}/books/` + id).then((res) => {
