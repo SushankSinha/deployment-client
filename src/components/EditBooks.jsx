@@ -11,7 +11,7 @@ export default function EditBooks() {
   const [book, setBook] = useState();
 
   useEffect(() => {
-    axios.get(`${API}/books/${bookid}`).then((res) => {
+    axios.get(`${API}/books/edit/${bookid}`).then((res) => {
       console.log(res.data);
       setBook(res.data);
     });
