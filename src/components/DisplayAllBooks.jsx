@@ -59,7 +59,7 @@ export function DisplayAllBooks() {
         <br />
         <br></br>
         <Label>Search</Label>
-        <Input onChange={handleSearch} />
+        <Input style={{width : '50%'}} onChange={handleSearch} />
       </div>
       <br />
       <br />
