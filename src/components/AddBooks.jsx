@@ -14,12 +14,13 @@ function AddBooks() {
 
   const navigate = useNavigate();
 
+      if(!name.length > 0 || poster.length > 0 || rating.length > 0 || summary.length > 0 ){
+      setAllowed(false)
+      }
+  
   async function handleSubmit(e) {
     e.preventDefault();
-
-    if(!name.length > 0 || poster.length > 0 || rating.length > 0 || summary.length > 0 ){
-      setAllowed(false)
-
+    
     try {
 
       const response = await axios.post(`${API}/books/add`, {name: name, poster: poster, rating: rating, summary: summary});
@@ -37,7 +38,6 @@ function AddBooks() {
     }
 
   }
-};
 
   return (
     <div>
