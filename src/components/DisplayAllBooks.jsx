@@ -14,7 +14,6 @@ export function DisplayAllBooks() {
       if (res.status === 401) {
         console.log("Data Not Found");
       }
-      console.log(res.data);
       setBookData(res.data);
     });
   };
@@ -25,11 +24,10 @@ export function DisplayAllBooks() {
 
   sessionStorage.setItem("BookData", JSON.stringify(bookData));
   var b = JSON.parse(sessionStorage.getItem("BookData", bookData));
-  // console.log("SessionStorage Data", b[0]);
+ 
   for (let i = 0; i < b.length; i++) {
     console.log(b[i]);
   }
-  console.log(bookData);
 
   const handleDelete = (id) => {
     axios.delete(`${API}/books/` + id).then((res) => {

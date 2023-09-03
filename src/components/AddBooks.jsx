@@ -18,7 +18,6 @@ function AddBooks({ bookData, setBookData }) {
       rating: rating,
       summary: summary,
     };
-    console.log(newBook);
 
     fetch(`${API}/books`, {
       method: "POST",
@@ -28,7 +27,6 @@ function AddBooks({ bookData, setBookData }) {
       .then((data) => data.json())
       .then((res) => {
         setBookData(res);
-        console.log(res);
       })
       .then(() => navigate("/"));
   };

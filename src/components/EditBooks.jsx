@@ -9,7 +9,6 @@ export default function EditBooks() {
   const { bookid } = useParams();
 
   const [book, setBook] = useState();
-  //   console.log("BOOK", book);
 
   useEffect(() => {
     axios.get(`${API}/books/${bookid}`).then((res) => {
@@ -39,7 +38,6 @@ function EditBookForm({ book }) {
       rating: rating,
       summary: summary,
     };
-    console.log(updatedBook);
 
     fetch(`${API}/books/${book.id}`, {
       method: "PUT",
