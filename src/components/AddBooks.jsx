@@ -13,10 +13,6 @@ function AddBooks() {
   const [allowed, setAllowed] = useState(true);
 
   const navigate = useNavigate();
-
-      if(name.length > 0 && poster.length > 0 && rating.length > 0 && summary.length > 0 ){
-      setAllowed(false)
-      }
   
   async function handleSubmit(e) {
     e.preventDefault();
@@ -104,7 +100,7 @@ function AddBooks() {
               name="summary"
               placeholder="Enter summary"
               type="text"
-              onChange={(e) => setSummary(e.target.value)}
+              onChange={(e) => {setSummary(e.target.value)}, {setAllowed(false)}}
               value={summary}
               required = {true}
             />
