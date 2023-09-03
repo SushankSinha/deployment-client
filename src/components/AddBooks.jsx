@@ -14,7 +14,7 @@ function AddBooks() {
 
   const navigate = useNavigate();
 
-      if(!name.length > 0 || poster.length > 0 || rating.length > 0 || summary.length > 0 ){
+      if(!name.length > 0 && poster.length > 0 && rating.length > 0 && summary.length > 0 ){
       setAllowed(false)
       }
   
