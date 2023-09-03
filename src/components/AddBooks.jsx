@@ -17,7 +17,7 @@ function AddBooks() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if(name !== "" && poster !== "" && rating !== "" && summary !== ""){
+    if(!name.length > 0 && poster.length > 0 && rating.length > 0 && summary.length > 0 ){
       setAllowed(false)
 
     try {
