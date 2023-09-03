@@ -44,7 +44,7 @@ export function DisplayAllBooks() {
     setSearchBook(bookData);
     return 
   }
-  const searchedBook = data.filter((item)=> item.title.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1 )
+  const searchedBook = bookData.filter((item)=> item.title.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1 )
   setSearchBook(searchedBook)
 };
 
