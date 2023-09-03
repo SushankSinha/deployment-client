@@ -39,7 +39,7 @@ function EditBookForm({ book }) {
       summary: summary,
     };
 
-    fetch(`${API}/books/${book.id}`, {
+    axios.put(`${API}/books/edit/${book.id}`, {
       method: "PUT",
       body: JSON.stringify(updatedBook),
       headers: { "Content-Type": "application/json" },

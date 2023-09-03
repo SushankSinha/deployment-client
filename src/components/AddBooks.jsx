@@ -10,25 +10,34 @@ function AddBooks() {
   const [poster, setPoster] = useState("");
   const [rating, setRating] = useState("");
   const [summary, setSummary] = useState("");
+  const [allowed, setAllowed] = useState(true);
 
   const navigate = useNavigate();
-  
-  const handleSubmit = () => {
-    const newBook = {
-      name: name,
-      poster: poster,
-      rating: rating,
-      summary: summary,
-    };
 
-    axios.post(`${API}/books/add`, {
-      method: "POST",
-      body: JSON.stringify(newBook),
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((data) => data.json())
-      .then((res) => navigate("/"));
-  };
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    if(name !== "" && poster !== "" && rating !== "" && summary !== ""){
+      setAllowed(false)
+
+    try {
+
+      const response = await axios.post(`${API}/books/add`, {name: name, poster: poster, rating: rating, summary: summary});
+
+      if(response.status === 201){
+        
+        alert("Book Added!");
+        navigate("/");
+      }
+
+    } catch (error) {
+
+      console.log(error)
+      alert("Failed to add book")
+    }
+
+  }
+};
 
   return (
     <div>
@@ -102,7 +111,7 @@ function AddBooks() {
           </Col>
         </FormGroup>
 
-        <Button onClick={handleSubmit}>Submit</Button>
+        <Button disabled = {allowed} onClick={handleSubmit}>Submit</Button>
       </Form>
     </div>
   );
