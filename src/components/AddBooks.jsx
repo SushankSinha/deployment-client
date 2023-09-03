@@ -10,7 +10,6 @@ function AddBooks() {
   const [poster, setPoster] = useState("");
   const [rating, setRating] = useState("");
   const [summary, setSummary] = useState("");
-  const [allowed, setAllowed] = useState(true);
 
   const navigate = useNavigate();
   
@@ -100,14 +99,14 @@ function AddBooks() {
               name="summary"
               placeholder="Enter summary"
               type="text"
-              onChange={(e) => {setSummary(e.target.value)}, {setAllowed(false)}}
+              onChange={(e) => setSummary(e.target.value)}
               value={summary}
               required = {true}
             />
           </Col>
         </FormGroup>
 
-        <Button disabled = {allowed} onClick={handleSubmit}>Submit</Button>
+        <Button onClick={handleSubmit}>Submit</Button>
       </Form>
     </div>
   );
